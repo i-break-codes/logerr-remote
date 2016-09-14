@@ -1,0 +1,154 @@
+* {
+  outline: 0;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: Menlo;
+  color: #454545;
+  font-size: 14px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.clear {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+.app-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  height: 100%;
+}
+
+header {
+  border-bottom: 1px solid #f3f3f3;
+  padding: 40px 0;
+}
+
+.logo {
+  h1 {
+    font-size: 19px;
+    padding-left: 10px;
+  }
+  
+  span {
+    color: #e74c3c;
+    position: relative;
+    top: -1px;
+  }
+}
+
+aside {
+  width: 15%;
+  margin-top: 40px;
+  float: left;
+  border-right: 1px solid #f3f3f3;
+  
+  li {
+    margin-bottom: 20px;
+  }
+  
+  a {
+    padding: 10px;
+    display: block;
+  }
+  
+  .active-main-nav {
+    color: #e74c3c;
+    position: relative;
+    
+    &:after {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 1px;
+      right: -1px;
+      top: 0;
+      background-color: #e74c3c;
+    }
+  }
+}
+
+.log-list {
+  float: left;
+  width: 40%;
+  margin-top: 40px;
+  padding-left: 20px;
+  border-right: 1px solid #f3f3f3;
+  
+  li {
+    padding: 25px 0;
+    border-bottom: 1px solid #f3f3f3;
+    margin: 0 20px;
+    
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+}
+
+.log-info {
+  > div {
+    display: inline-block;
+    font-size: 12px;
+  }
+  
+  .log-time {
+    color: #ccc;
+    float: right;
+    margin-top: 5px;
+  }
+}
+
+.log-badge {
+  padding: 5px;
+  margin-bottom: 15px;
+  padding-left: 25px;
+  border: 1px solid #e74c3c;
+  
+  &.bug-count-badge {
+    background-image: url('../images/bug.svg');
+    background-size: 14px auto;
+    background-position: 5px center;
+    background-repeat: no-repeat;
+  }
+  
+  &.development-badge {
+    background-color: #e74c3c;
+    padding: 5px;
+    color: #fff;
+  }
+}
+
+.log-summary-wrapper {
+  float: left;
+  margin-top: 40px;
+  width: 45%;
+  padding: 0 20px;
+  padding-right: 0;
+  
+  h2 {
+    font-size: 16px;
+    line-height: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f3f3f3;
+    
+    span {
+      color: #e74c3c;
+    }
+  }
+}

@@ -1,23 +1,18 @@
 <div class="log-list">
   <ul>
-    <li>
-      <div class="log-item-wrapper">
-        <div class="log-info clear">
-          <div class="log-badge development-badge">development</div>
-          <div class="log-badge bug-count-badge">23</div>
-          <div class="log-time">7 hours ago</div>
+    <% for(var i = 0, l = records.length; i < l; i++) { %>
+      <li data-id="<%= records[i].id %>" class="<%= (!records[i].read ? 'log-unread' : '') %>">
+        <div class="log-item-wrapper">
+          <div class="log-info clear">
+            <div class="log-badge development-badge"><%= records[i].badge %></div>
+            <div class="log-time"><%= records[i].created_at %></div>
+          </div>
+          <h4><%= records[i].err %></h4>
         </div>
-        <h4>Uncaught ReferenceError: test is not defined</h4>
-      </div>
-    </li>
-    <li>
-      <div class="log-item-wrapper">
-        <div class="log-info clear">
-          <div class="log-badge development-badge">development</div>
-          <div class="log-time">8 hours ago</div>
-        </div>
-        <h4>Uncaught ReferenceError: test is not defined</h4>
-      </div>
-    </li>
+      </li>
+    <% } %>
   </ul>
 </div>
+
+
+   

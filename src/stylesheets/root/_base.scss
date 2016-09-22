@@ -12,7 +12,7 @@ html, body {
 body {
   font-family: Menlo;
   color: #454545;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 a {
@@ -50,12 +50,21 @@ header {
     position: relative;
     top: -1px;
   }
+  
+  sup {
+    font-size: 12px;
+    position: relative;
+    top: -20px;
+    right: 15px;
+    text-transform: uppercase;
+  }
 }
 
 aside {
   width: 15%;
   margin-top: 40px;
   float: left;
+  height: calc(100% - 140px);
   border-right: 1px solid #f3f3f3;
   
   li {
@@ -87,16 +96,33 @@ aside {
   float: left;
   width: 40%;
   margin-top: 40px;
-  padding-left: 20px;
+  padding: 0 20px;
   border-right: 1px solid #f3f3f3;
+  height: calc(100% - 140px);
+  
   
   li {
     padding: 25px 0;
     border-bottom: 1px solid #f3f3f3;
-    margin: 0 20px;
+    position: relative;
     
     &:first-child {
       padding-top: 0;
+    }
+    
+    &:hover {
+      cursor: pointer;
+      
+      &:after {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 1px;
+        right: -21px;
+        top: 0;
+        display: block;
+        background-color: #e74c3c;
+      }
     }
   }
 }
@@ -104,7 +130,7 @@ aside {
 .log-info {
   > div {
     display: inline-block;
-    font-size: 12px;
+    font-size: 11px;
   }
   
   .log-time {
@@ -135,14 +161,16 @@ aside {
 }
 
 .log-summary-wrapper {
+  position: relative;
   float: left;
   margin-top: 40px;
   width: 45%;
   padding: 0 20px;
   padding-right: 0;
+  height: calc(100% - 140px);
   
   h2 {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid #f3f3f3;
@@ -150,5 +178,49 @@ aside {
     span {
       color: #e74c3c;
     }
+  }
+  
+  h4 {
+    color: #e74c3c;
+    padding-bottom: 10px;
+    font-size: 12px;
+    margin-top: 20px;
+    text-decoration: underline;
+  }
+  
+  li {
+    margin-bottom: 5px;
+  }
+}
+
+.no-data {
+  position: absolute;
+  max-width: 250px;
+  line-height: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -150%);
+  
+  p {
+    padding: 10px;
+    text-align: center;
+    color: #ccc;
+    
+    &:first-child {
+      font-size: 24px;
+    }
+  }
+}
+
+.log-unread {
+  &:before {
+    position: absolute;
+    content: "";
+    height: 6px;
+    width: 6px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    right: 20px;
+    top: 67px;
   }
 }

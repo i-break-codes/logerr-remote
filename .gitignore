@@ -1,5 +1,5 @@
 /node_modules
 *.css
 .DS_Store
-/app/assets/scripts/**/*.js
-/app/assets/stylesheets/**/*.css
+/app/assets/scripts
+/app/assets/stylesheets

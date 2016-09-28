@@ -34,7 +34,7 @@ app.get('/', function(req, res) {
   
   console.log('Serving Index');
   
-  connection.query('SELECT id, err, badge, created_at, read FROM tbl_logs', function(err, rows, fields) {
+  connection.query('SELECT id, err, badge, created_at, is_read FROM tbl_logs ORDER BY id DESC LIMIT 20', function(err, rows, fields) {
     if (err) throw err;
     res.render(__dirname + '/app/views/pages/index', {records: rows});
   });
@@ -75,6 +75,28 @@ app.post('/log', function(req, res) {
     res.send(JSON.stringify({
       success: true
     }));
+  });
+});
+
+app.post('/exception-data', function(req, res) {
+  console.log('Pull Exception Details');
+  var params = req.body;
+  
+  connection.query('SELECT * FROM tbl_logs WHERE id = ' + params.id, function(err, rows, fields) {
+    if (err) throw err;
+    res.send(rows);
+  });
+});
+
+app.post('/log-read', function(req, res) {
+  console.log('Log Read');
+  var params = req.body;
+  
+  connection.query('UPDATE posts SET read = 1 WHERE id = ' + params.id, function (err, result) {
+    if (err) throw err;
+    res.send({
+      success: 'ok'
+    });
   });
 });
 

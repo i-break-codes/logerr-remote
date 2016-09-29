@@ -21,11 +21,32 @@ var App = function() {
       template += '</li>';
   
       $('.log-list ul').prepend(template);
+      
+      showDesktopNotification(msg);
     });
   }
   
   function getLogs() {
   
+  }
+  
+  function showDesktopNotification(msg) {
+    Notification.requestPermission().then(function(result) {
+      new Notification(msg.data.error);
+    });
+  }
+  
+  function askNotificationPermission() {
+    if (!("Notification" in window)) {
+       throw 'Desktop notifications not supported';
+       return;
+     }
+     
+     //check if the user has his permission set to allowAll or allow
+     if (Notification.permission !== 'denied') {
+       Notification.requestPermission();
+     }
+
   }
   
   function getLogSummary() {

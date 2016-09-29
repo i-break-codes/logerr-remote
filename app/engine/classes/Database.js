@@ -9,11 +9,10 @@ var Database = function() {
     database : DBConfig.NAME
   });
   
-  function select(cols, table, where, order_by, limit) {
+  function select(cols, table, where, order_by, limit, cb) {
     var query;
     
     query  = 'SELECT ' + cols + ' FROM ' + table;
-    query += 'FROM ' + table;
     
     if(where) {
       query += ' WHERE ' + where;
@@ -26,10 +25,18 @@ var Database = function() {
     if(limit) {
       query += ' LIMIT ' + limit;
     }
+    
+    console.log(query);
+    
+    connect.query(query, function(err, rows, fields) {
+      if (err) throw err;
+      cb({data: rows});
+    });
   }
   
   return {
-    connect: connect
+    connect: connect,
+    select: select
   }
 }
 

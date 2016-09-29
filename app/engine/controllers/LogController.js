@@ -4,13 +4,12 @@ var LogController = function() {
   function getLogs(req, res, path) {
     var dateTime = new Date().toLocaleString();
     
-    Database.connect.query('SELECT id, err, badge, created_at, is_read FROM tbl_logs ORDER BY id DESC LIMIT 20', function(err, rows, fields) {
-      if (err) throw err;
-      res.render(path, {records: rows});
+    Database.select('id, err, badge, created_at, is_read', 'tbl_logs', null, 'id DESC', 20, function(data){
+      res.render(path, data);
     });
   }
   
-  function addLog(req, res) {
+  function addLog(io, req, res) {
     var params = req.body;
     
     var d = new Date(params.datetime),
@@ -51,9 +50,8 @@ var LogController = function() {
   function getExceptionData(req, res) {
     var params = req.body;
     
-    Database.connect.query('SELECT * FROM tbl_logs WHERE id = ' + params.id, function(err, rows, fields) {
-      if (err) throw err;
-      res.send(rows);
+    Database.select('*', 'tbl_logs', 'id = ' + params.id, 'id DESC', 20, function(data){
+      res.send(data);
     });
   }
   

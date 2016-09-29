@@ -20,7 +20,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/log', function(req, res) {
-  LogController.addLog(req, res);
+  LogController.addLog(io, req, res);
 });
 
 app.post('/exception-data', function(req, res) {

@@ -51,7 +51,7 @@ var App = function() {
   }
   
   function printLogSummary(res) {
-    var data = res[0];
+    var data = res.data[0];
     var wrapper = $('.log-summary-details')
     console.log(data);
     $('.no-data').addClass('hide');

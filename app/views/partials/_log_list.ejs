@@ -1,13 +1,13 @@
 <div class="log-list" id="log-list">
   <ul>
-    <% for(var i = 0, l = records.length; i < l; i++) { %>
-      <li data-id="<%= records[i].id %>" class="<%= (!records[i].read ? 'log-unread' : '') %>">
+    <% for(var i = 0, l = data.length; i < l; i++) { %>
+      <li data-id="<%= data[i].id %>" class="<%= (!data[i].read ? 'log-unread' : '') %>">
         <div class="log-item-wrapper">
           <div class="log-info clear">
-            <div class="log-badge development-badge"><%= records[i].badge %></div>
-            <div class="log-time"><%= records[i].created_at %></div>
+            <div class="log-badge development-badge"><%= data[i].badge %></div>
+            <div class="log-time"><%= data[i].created_at %></div>
           </div>
-          <h4><%= records[i].err %></h4>
+          <h4><%= data[i].err %></h4>
         </div>
       </li>
     <% } %>

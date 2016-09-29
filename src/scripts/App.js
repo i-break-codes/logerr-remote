@@ -32,7 +32,12 @@ var App = function() {
   
   function showDesktopNotification(msg) {
     Notification.requestPermission().then(function(result) {
-      new Notification(msg.data.error);
+      var breakNotification = msg.data.error.split(':');
+      
+      new Notification(breakNotification[0], {
+        icon: '/assets/images/error.png',
+        body: breakNotification[1].trim(),
+      });
     });
   }
   
@@ -73,8 +78,7 @@ var App = function() {
   
   function printLogSummary(res) {
     var data = res.data[0];
-    var wrapper = $('.log-summary-details')
-    console.log(data);
+    var wrapper = $('.log-summary-details');
     $('.no-data').addClass('hide');
     $('.log-summary-details').removeClass('hide');
     

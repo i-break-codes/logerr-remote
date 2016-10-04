@@ -12,10 +12,6 @@
     border-bottom: 1px solid #f3f3f3;
     position: relative;
     
-    &:first-child {
-      padding-top: 0;
-    }
-    
     &.active-log {
       &:after {
         content: "";

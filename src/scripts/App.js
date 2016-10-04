@@ -10,7 +10,7 @@ var App = function() {
   function addToLog() {
     socket.on('exception-logged', function(msg) {
       var template;
-      template  = '<li>';
+      template  = '<li class="log-unread">';
       template += '<div class="log-item-wrapper">';
       template += '<div class="log-info clear">';
       template += '<div class="log-badge development-badge">' + msg.data.badge + '</div>';
@@ -58,6 +58,8 @@ var App = function() {
     $('#log-list').find('ul li').on('click', function() {
       $(this).siblings().removeClass('active-log');
       $(this).addClass('active-log');
+      
+      window.location.hash = 'id=' + $(this).data('id');
       
       $.ajax({
         url: '/exception-data',

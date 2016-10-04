@@ -13,12 +13,7 @@ var LogController = function() {
     var params = req.body;
     
     var d = new Date(params.datetime),
-      dformat = [d.getFullYear() ,d.getMonth()+1,
-                 d.getDate()
-                 ].join('-')+' '+
-                [d.getHours(),
-                 d.getMinutes(),
-                 d.getSeconds()].join(':');
+        dformat = [d.getFullYear() ,d.getMonth()+1, d.getDate()].join('-') + ' ' + [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
 
     var logException = {
       err: params.error,
@@ -50,7 +45,7 @@ var LogController = function() {
   function getExceptionData(req, res) {
     var params = req.body;
     
-    Database.select('*', 'tbl_logs', 'id = ' + params.id, 'id DESC', 20, function(data){
+    Database.select('*', 'tbl_logs', 'id = ' + params.id, 'id DESC', 20, function(data) {
       res.send(data);
     });
   }

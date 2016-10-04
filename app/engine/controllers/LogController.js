@@ -30,10 +30,15 @@ var LogController = function() {
       badge: params.badge
     };
     
+    // TODO: Validate Data
     var query = Database.connect.query('INSERT INTO tbl_logs SET ?', logException, function(err, result) {
+      var sendData = req.body;
+      sendData.id = result.insertId;
+      
+      console.log(sendData);
+      
       io.emit('exception-logged', {
-        requestedFrom: req.get('origin'),
-        data: req.body //obviously validate first
+        data: sendData
       });
       
       res.send(JSON.stringify({

@@ -33,9 +33,7 @@ var LogController = function() {
     // TODO: Validate Data
     var query = Database.connect.query('INSERT INTO tbl_logs SET ?', logException, function(err, result) {
       var sendData = req.body;
-      sendData.id = result.insertId;
-      
-      console.log(sendData);
+          sendData.id = result.insertId;
       
       io.emit('exception-logged', {
         data: sendData

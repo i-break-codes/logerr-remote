@@ -4,8 +4,10 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var bodyParser = require('body-parser');
 
+var basePath = __dirname + '/app';
+
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(basePath));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
@@ -15,7 +17,7 @@ app.use(bodyParser.urlencoded({
 var LogController = require("./app/engine/controllers/LogController.js");
 
 app.get('/', function(req, res) {
-  var loadPath = __dirname + '/app/views/pages/index';
+  var loadPath = basePath + '/views/pages/index';
   LogController.getLogs(req, res, loadPath);
 });
 

@@ -53,10 +53,24 @@ var LogController = function() {
     });
   }
   
+  function markExceptionAsRead(req, res) {
+    var params = req.body;
+    
+    console.log('PARAMETER VALUE : ' + params.id);
+    
+    Database.connect.query('UPDATE tbl_logs SET is_read = ? WHERE id = ?', [1, parseInt(params.id)], function (err, result) {
+      if (err) throw err;
+      res.send({
+        success: 'ok'
+      });
+    });
+  }
+  
   return {
     getLogs: getLogs,
     addLog: addLog,
-    getExceptionData: getExceptionData
+    getExceptionData: getExceptionData,
+    markExceptionAsRead: markExceptionAsRead
   }
 }
 

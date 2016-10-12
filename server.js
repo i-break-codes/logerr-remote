@@ -30,14 +30,7 @@ app.post('/exception-data', function(req, res) {
 });
 
 app.post('/log-read', function(req, res) {
-  var params = req.body;
-  
-  connection.query('UPDATE posts SET read = 1 WHERE id = ' + params.id, function (err, result) {
-    if (err) throw err;
-    res.send({
-      success: 'ok'
-    });
-  });
+  LogController.markExceptionAsRead(req, res);
 });
 
 http.listen(8080);

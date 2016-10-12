@@ -1,7 +1,7 @@
 <div class="log-list" id="log-list">
   <ul>
     <% for(var i = 0, l = data.length; i < l; i++) { %>
-      <li data-id="<%= data[i].id %>" class="<%= (!data[i].read ? 'log-unread' : '') %>">
+      <li data-id="<%= data[i].id %>" class="<%= (!data[i].is_read ? 'log-unread' : '') %>">
         <div class="log-item-wrapper">
           <div class="log-info clear">
             <div class="log-badge development-badge"><%= data[i].badge %></div>

@@ -10,11 +10,11 @@ var App = function() {
   function addToLog() {
     socket.on('exception-logged', function(msg) {
       var template;
-      template  = '<li class="log-unread">';
+      template  = '<li data-id="' + msg.data.id + '" class="log-unread">';
       template += '<div class="log-item-wrapper">';
       template += '<div class="log-info clear">';
       template += '<div class="log-badge development-badge">' + msg.data.badge + '</div>';
-      template += '<div class="log-time">' + msg.data.created_at + '</div>';
+      template += '<div class="log-time">' + msg.data.datetime + '</div>';
       template += '</div>';
       template += '<h4>' + msg.data.error + '</h4>';
       template += '</div>';
@@ -55,11 +55,26 @@ var App = function() {
   }
   
   function getLogSummary() {
-    $('#log-list').find('ul li').on('click', function() {
+    $('#log-list').on('click', 'ul li', function() {
       $(this).siblings().removeClass('active-log');
       $(this).addClass('active-log');
       
       window.location.hash = 'id=' + $(this).data('id');
+      
+      $.ajax({
+        url: '/log-read',
+        type: 'post',
+        dataType: 'json',
+        data: {
+          id: $(this).data('id')
+        },
+        success: function(res) {
+          console.log('read success');
+        },
+        error: function() {
+          throw 'dicks';
+        }
+      });
       
       $.ajax({
         url: '/exception-data',
@@ -81,8 +96,12 @@ var App = function() {
   function printLogSummary(res) {
     var data = res.data[0];
     var wrapper = $('.log-summary-details');
+    
     $('.no-data').addClass('hide');
     $('.log-summary-details').removeClass('hide');
+    
+    //Remove Read Reciept
+    $('#log-list').find('li[data-id="' + data.id + '"]').removeClass('log-unread');
     
     wrapper.find('h2').text(data.err);
     wrapper.find('.log-stack-trace span:eq(1)').text(data.stack_trace);

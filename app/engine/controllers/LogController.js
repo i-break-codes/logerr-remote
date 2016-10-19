@@ -56,13 +56,11 @@ var LogController = function() {
   function markExceptionAsRead(req, res) {
     var params = req.body;
     
-    console.log('PARAMETER VALUE : ' + params.id);
+    console.log('Update Triggered');
     
-    Database.connect.query('UPDATE tbl_logs SET is_read = ? WHERE id = ?', [1, parseInt(params.id)], function (err, result) {
-      if (err) throw err;
-      res.send({
-        success: 'ok'
-      });
+    Database.update('tbl_logs', ['is_read'], [1], ['id'], [params.id], function(data) {
+      console.log(data);
+      res.send(data);
     });
   }
   

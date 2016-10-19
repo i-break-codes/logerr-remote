@@ -34,9 +34,33 @@ var Database = function() {
     });
   }
   
+  function update(table, columns, values, where_cols, where_values, cb) {
+    var query;
+    
+    query = 'UPDATE ' + table + ' SET ';
+    
+    for(var i = 0, l = columns.length; i < l; i++) {
+      query += columns[i] + ' = ?';
+    }
+    
+    query += ' WHERE ';
+    
+    for(var i = 0, l = where_cols.length; i < l; i++) {
+      query += where_cols[i] + ' = ? ';
+    }
+    
+    var concatVals = values.concat(where_values);
+    
+    connect.query(query, concatVals, function(err, results) {
+      if (err) throw err;
+      cb(results);
+    });
+  }
+  
   return {
     connect: connect,
-    select: select
+    select: select,
+    update: update
   }
 }
 

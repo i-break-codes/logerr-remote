@@ -30,10 +30,11 @@ var LogController = function() {
       badge: params.badge
     };
     
-    // TODO: Validate Data
-    var query = Database.connect.query('INSERT INTO tbl_logs SET ?', logException, function(err, result) {
-      var sendData = req.body;
-          sendData.id = result.insertId;
+    // TODO: Validate
+    Database.insert('tbl_logs', logException, function(data) {
+      var sendData = data.record;
+          sendData.id = data.id;
+        
       
       io.emit('exception-logged', {
         data: sendData
@@ -55,8 +56,6 @@ var LogController = function() {
   
   function markExceptionAsRead(req, res) {
     var params = req.body;
-    
-    console.log('Update Triggered');
     
     Database.update('tbl_logs', ['is_read'], [1], ['id'], [params.id], function(data) {
       console.log(data);

@@ -9,6 +9,17 @@ var Database = function() {
     database : DBConfig.NAME
   });
   
+  function insert(table, data, cb) {
+    var query;
+    
+    query = 'INSERT INTO ' + table + ' SET ?';
+    
+    connect.query(query, data, function(err, result) {
+      if (err) throw err;
+      cb({record: data, id: result.insertId});
+    });
+  }
+   
   function select(cols, table, where, order_by, limit, cb) {
     var query;
     
@@ -25,9 +36,7 @@ var Database = function() {
     if(limit) {
       query += ' LIMIT ' + limit;
     }
-    
-    console.log(query);
-    
+
     connect.query(query, function(err, rows, fields) {
       if (err) throw err;
       cb({data: rows});
@@ -60,7 +69,8 @@ var Database = function() {
   return {
     connect: connect,
     select: select,
-    update: update
+    update: update,
+    insert: insert
   }
 }
 

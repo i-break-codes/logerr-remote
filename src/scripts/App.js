@@ -14,9 +14,9 @@ var App = function() {
       template += '<div class="log-item-wrapper">';
       template += '<div class="log-info clear">';
       template += '<div class="log-badge development-badge">' + msg.data.badge + '</div>';
-      template += '<div class="log-time">' + msg.data.datetime + '</div>';
+      template += '<div class="log-time">' + new Date(msg.data.created_at )+ '</div>';
       template += '</div>';
-      template += '<h4>' + msg.data.error + '</h4>';
+      template += '<h4>' + msg.data.err + '</h4>';
       template += '</div>';
       template += '</li>';
   
@@ -32,7 +32,7 @@ var App = function() {
   
   function showDesktopNotification(msg) {
     Notification.requestPermission().then(function(result) {
-      var breakNotification = msg.data.error.split(':');
+      var breakNotification = msg.data.err.split(':');
       
       new Notification(breakNotification[0], {
         icon: '/assets/images/error.png',

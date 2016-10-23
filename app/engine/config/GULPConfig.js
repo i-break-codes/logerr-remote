@@ -10,7 +10,7 @@ var GULPConfig = Object.freeze({
     fileSuffix: '.min'
   },
   js: {
-    basePath: 'src/scripts/**/*.scss',
+    basePath: 'src/scripts/**/*.js',
     outputPath: 'app/assets/scripts',
     fileSuffix: '.min'
   },

@@ -1,14 +1,14 @@
 var mysql = require('mysql');
 var DBConfig = require('../config/DBConfig.js');
 
+var connect = mysql.createConnection({
+  host     : DBConfig.HOST,
+  user     : DBConfig.USER,
+  password : DBConfig.PASS,
+  database : DBConfig.NAME
+});
+
 var Database = function() {
-  var connect = mysql.createConnection({
-    host     : DBConfig.HOST,
-    user     : DBConfig.USER,
-    password : DBConfig.PASS,
-    database : DBConfig.NAME
-  });
-  
   function insert(table, data, cb) {
     var query;
     

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Remote Logerr - App</title>
+    <link rel="stylesheet" href="app.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="logo">
+        <div class="circ">
+          <span>{</span><span>}</span>
+        </div>
+        <h1>logerr remote (beta)</h1>
+      </div>
+
+      <div class="screen">
+        <img src="logerr-screen.png" alt="">
+      </div>
+      
+      <div class="error-note">
+        <p><span>Note :</span> Not recommended for <span>production</span> use as per the current state of the application.</p>
+      </div>
+      
+      <div class="documentation-wrapper clear">
+        <aside id="sidebar">
+          <nav>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#setup">Setup</a></li>
+              <li><a href="#config">Config</a></li>
+              <li><a href="#logerrjs">Use with Logerr.js</a></li>
+              <li><a href="#report-bugs">Report Bugs</a></li>
+              <li><a href="#feature-request">Feature request</a></li>
+            </ul>
+          </nav>
+        </aside>
+        
+        <div class="documentation-content">
+          
+          <h2>About</h2>
+          <div class="documentation-section">
+            <p>Logerr Remote helps you log JavaScript exceptions remotely. Application is in beta stage as its not quiet mature 
+              yet to release it as stable. As of now, application shows you recent 20 exceptions which are logged remotely with details such as
+            error, line number, file name, client timestamp, browser etc.</p>
+            <br>
+            <p>I'll be updating app every week with powerful features to make logging helpful, easy to debug. Please refer to <a href="#features">feature list</a> for more information.</p>
+            <br>
+            <p><span class="inline-code">Note: Please don't use this application on production for now as data isn't validated.</span></p>
+          </div>
+          
+          <hr>
+          
+          <h2 id="features">Features</h2>
+          <div class="documentation-section">
+            <p>Logerr remote will soon be filled with useful features, for now, you will be able to use below features</p>
+            <ul class="u-list">
+              <li>20 recent JavaScript exceptions (Can be increased in config)</li>
+              <li>Shows full exception details including client browser, timestamp</li>
+              <li>Realtime exception logging using websockets</li>
+              <li>Desktop Notifications</li>
+            </ul>
+            
+            <p>Whats next?</p>
+            <ul class="u-list">
+              <li>Lazy loading errors (no more limit of 20)</li>
+              <li>Unique exception list only with exception count</li>
+              <li>Minified file mapping</li>
+              <li>Analytics, graphs on dashboard</li>
+              <li>Reports, exports</li>
+            </ul>
+          </div>
+          
+          <hr>
+          
+          <h2 id="setup">Setup</h2>
+          
+          <div class="documentation-section">
+            <h3>NodeJS</h3>
+            <p>Get an appropriate package based on your OS from <a href="https://nodejs.org/en/download/">here</a>.</p>
+          </div>
+          
+          <div class="documentation-section">
+            <h3>Install Node Modules</h3>
+            <p>Navigate to the project directory from your command line and use the below command to install required modules.</p>
+            
+            <div class="code-block">
+              <code>
+                <pre>npm install</pre>
+              </code>
+            </div>
+            
+            <p>Included modules (Dependencies) :</p>
+            <ul class="u-list">
+              <li>body-parser</li>
+              <li>ejs</li>
+              <li>express</li>
+              <li>mysql</li>
+              <li>socket.io</li>
+              <li>useragent</li>
+            </ul>
+            
+            <p>Included modules (Dev Dependencies) :</p>
+            <ul class="u-list">
+              <li>browser-sync</li>
+              <li>gulp</li>
+              <li>gulp-autoprefixer</li>
+              <li>gulp-clean-css</li>
+              <li>gulp-rename</li>
+              <li>gulp-sass</li>
+              <li>gulp-uglify</li>
+            </ul>
+          </div>
+          
+          <div class="documentation-section">
+            <h3>Database</h3>
+            <p>Create a database name Logerr and Import DB dump from db/logerr_2016-10-23.sql <em>(migration coming soon)</em></p>
+          </div>
+          
+          <div class="documentation-section">
+            <h3>Configure</h3>
+            <p>Refer <a href="#config">Configuration</a> section for further information.</p>
+          </div>
+          
+          <div class="documentation-section">
+            <h3>Compile Assets</h3>
+            
+            <div class="code-block">
+              <code>
+                <pre>gulp <span class="inline-comment">//runs on port 8080 by default</span></pre>
+              </code>
+            </div>
+          </div>
+          
+          <div class="documentation-section">
+            <h3>Run Node Server</h3>
+            
+            <div class="code-block">
+              <code>
+                <pre>node server.js <span class="inline-comment">//runs on port 8080 by default</span></pre>
+              </code>
+            </div>
+          </div>
+          
+          <hr>
+          
+          <h2 id="config">Config</h2>
+          <div class="documentation-section">
+            <h3>Database Configuration<span>(app/engine/config/DBConfig.js)</span></h3>
+            
+            <div class="code-block">
+              <code>
+<pre>
+<span class="inline-comment">//database default configuration</span>
+
+{
+  HOST: 'localhost', <span class="inline-comment">//database host</span>
+  USER: 'root',      <span class="inline-comment">//database user</span>
+  PASS: '',          <span class="inline-comment">//database password</span>
+  NAME: 'logerr'     <span class="inline-comment">//database name</span>
+}
+</pre>
+              </code>
+            </div>
+            
+            <h3>Gulp Configuration<span>(app/engine/config/GULPConfig.js)</span></h3>
+            <div class="code-block">
+              <code>
+<pre>
+<span class="inline-comment">//gulp default configuration</span>
+{
+  bSync: { <span class="inline-comment">//browsersync config</span>
+    baseDir: 'app',
+    proxy: 'http://localhost:8080', <span class="inline-comment">//set proxy for live reload</span>
+    port: 8080
+  },
+  css: {
+    basePath: 'src/stylesheets/**/*.scss', <span class="inline-comment">//path to watch + compile</span>
+    outputPath: 'app/assets/stylesheets', <span class="inline-comment">//path to output compiled files</span>
+    fileSuffix: 'min' <span class="inline-comment">//suffix for minified files</span>
+  },
+  js: {
+    basePath: 'src/scripts/**/*.scss', <span class="inline-comment">//path to watch + compile</span>
+    outputPath: 'app/assets/scripts', <span class="inline-comment">//path to output compiled files</span>
+    fileSuffix: 'min' <span class="inline-comment">//suffix for minified files</span>
+  },
+  views: {
+    basePath: 'app/*.ejs' <span class="inline-comment">//watch view file change</span>
+  },
+  autoprefixer: {
+    condition: 'last 3 version' <span class="inline-comment">//autoprefix for</span>
+  }
+}
+</pre>
+              </code>
+            </div>
+          </div>
+          
+          <hr>
+          
+          <h2 id="logerrjs">Using with Logerr.js</h2>
+          <div class="documentation-section">
+            <p>You need to set <span class="inline-code">remoteLogging</span> to <span class="inline-code">true</span>. 
+              Point <span class="inline-code">remoteSettings</span> <span class="inline-code">url</span> parameter to 
+              the url you have deployed your logerr remote on Refer Logerr.js 
+              <a href="https://i-break-codes.github.io/logerr/" target="_blank">documentation</a> for more information.</p>
+          </div>
+          
+          <hr>
+          
+          <h2 id="report-bugs">Report Bugs</h2>
+          <div class="documentation-section">
+            <p>Bugs and requests, submit them through the project's <a href="https://github.com/i-break-codes/logerr-remote/issues/new" target="_blank">issues</a> section</p>
+          </div>
+          
+          <hr>
+          
+          <h2 id="feature-request">Feature Request</h2>
+          <div class="documentation-section">
+            <p>Create an issue in <a href="https://github.com/i-break-codes/logerr-remote/issues/new" target="_blank">issues</a> section of the repository keeping <span class="inline-code">[Feature Request]</span> as a prefix in the title.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

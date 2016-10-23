@@ -200,3 +200,17 @@ aside li:first-of-type a {
   color: #e74c3c;
   padding: 2px 5px;
 }
+
+.view-on-github {
+  padding: 5px 10px;
+  font-size: 11px;
+  display: inline-block;
+  border-radius: 3px;
+  margin: 20px 0;
+  border: 1px solid #e74c3c;
+}
+
+.view-on-github:hover {
+  text-decoration: none;
+  border-color: transparent;;
+}

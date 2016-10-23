@@ -1,7 +1,8 @@
 ![alt tag](http://i.imgur.com/aCnkd6q.jpg)
 
-# logerr-remote
 Logerr Remote helps you log JavaScript exceptions remotely. Application is in beta stage, its buggy, without validations, but better things will come soon. As of now, it shows you twenty recent exceptions which are logged remotely with details such as error, line number, file name, client timestamp, browser etc.
+
+Use this application with [logerr](https://github.com/i-break-codes/logerr) to get the exception data.
 
 ---
 

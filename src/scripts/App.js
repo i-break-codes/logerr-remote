@@ -9,18 +9,20 @@ var App = function() {
   
   function addToLog() {
     socket.on('exception-logged', function(msg) {
-      var template;
-      template  = '<li data-id="' + msg.data.id + '" class="log-unread">';
-      template += '<div class="log-item-wrapper">';
-      template += '<div class="log-info clear">';
-      template += '<div class="log-badge development-badge">' + msg.data.badge + '</div>';
-      template += '<div class="log-time">' + new Date(msg.data.created_at )+ '</div>';
-      template += '</div>';
-      template += '<h4>' + msg.data.err + '</h4>';
-      template += '</div>';
-      template += '</li>';
+      
+      // TODO: Refactor
+      var t;
+      t  = '<li data-id="' + msg.data.id + '" class="log-unread">';
+      t += '<div class="log-item-wrapper">';
+      t += '<div class="log-info clear">';
+      t += '<div class="log-badge development-badge">' + msg.data.badge + '</div>';
+      t += '<div class="log-time">' + new Date(msg.data.created_at )+ '</div>';
+      t += '</div>';
+      t += '<h4>' + msg.data.err + '</h4>';
+      t += '</div>';
+      t += '</li>';
   
-      $('.log-list ul').prepend(template);
+      $('.log-list ul').prepend(t);
       
       showDesktopNotification(msg);
     });
@@ -103,6 +105,7 @@ var App = function() {
     //Remove Read Reciept
     $('#log-list').find('li[data-id="' + data.id + '"]').removeClass('log-unread');
     
+    // TODO: Refactor this shitty code
     wrapper.find('h2').text(data.err);
     wrapper.find('.log-stack-trace span:eq(1)').text(data.stack_trace);
     wrapper.find('.log-file-name span:eq(1)').text(data.file_name);

@@ -4,7 +4,7 @@ var LogController = function() {
   function getLogs(req, res, path) {
     var dateTime = new Date().toLocaleString();
     
-    Database.select('id, err, badge, created_at, is_read', 'tbl_logs', null, 'id DESC', 20, function(data){
+    Database.select('id, err, badge, created_at, is_read', 'tbl_logs', null, 'id DESC', 20, (data) => {
       res.render(path, data);
     });
   }
@@ -31,10 +31,9 @@ var LogController = function() {
     };
     
     // TODO: Validate
-    Database.insert('tbl_logs', logException, function(data) {
+    Database.insert('tbl_logs', logException, (data) => {
       var sendData = data.record;
           sendData.id = data.id;
-        
       
       io.emit('exception-logged', {
         data: sendData
@@ -49,7 +48,7 @@ var LogController = function() {
   function getExceptionData(req, res) {
     var params = req.body;
     
-    Database.select('*', 'tbl_logs', 'id = ' + params.id, 'id DESC', 20, function(data) {
+    Database.select('*', 'tbl_logs', 'id = ' + params.id, 'id DESC', 20, (data) => {
       res.send(data);
     });
   }
@@ -57,8 +56,7 @@ var LogController = function() {
   function markExceptionAsRead(req, res) {
     var params = req.body;
     
-    Database.update('tbl_logs', ['is_read'], [1], ['id'], [params.id], function(data) {
-      console.log(data);
+    Database.update('tbl_logs', ['is_read'], [1], ['id'], [params.id], (data) => {
       res.send(data);
     });
   }

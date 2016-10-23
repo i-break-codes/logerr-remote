@@ -4,13 +4,14 @@ var gulp         = require('gulp'),
     autoprefixer = require('gulp-autoprefixer'),
     cleanCSS     = require('gulp-clean-css'),
     uglify       = require('gulp-uglify'),
-    renameFiles  = require('gulp-rename');
+    renameFiles  = require('gulp-rename'),
+    config       = require('./app/engine/config/GULPConfig.js');
     
   gulp.task('browser-sync', function() {
     browserSync.init(null, {
-      baseDir: 'app',
-      proxy: 'http://localhost:8080',
-      port: 8080
+      baseDir: config.bSync.baseDir,
+      proxy: config.bSync.proxy,
+      port: config.bSync.port
     });
   });
   
@@ -19,36 +20,39 @@ var gulp         = require('gulp'),
   });
     
   gulp.task('css', function () {
-    return gulp.src('src/stylesheets/**/*.scss')
+    return gulp.src(config.css.basePath)
       .pipe(sass().on('error', sass.logError))
-      .pipe(autoprefixer('last 3 version'))
-      .pipe(gulp.dest('app/assets/stylesheets'))
+      .pipe(autoprefixer(autoprefixer.condition))
+      .pipe(gulp.dest(config.css.outputPath))
       .pipe(cleanCSS({debug: true}, function(details) {
         console.log('Original Size : ' + details.name + ': ' + details.stats.originalSize + ' bytes');
         console.log('Minified Size : ' + details.name + ': ' + details.stats.minifiedSize + ' bytes');
       }))
-      .pipe(renameFiles({ suffix: '.min' }))
-      .pipe(gulp.dest('app/assets/stylesheets'))
+      .pipe(renameFiles({ 
+        suffix: config.js.fileSuffix 
+      }))
+      .pipe(gulp.dest(config.css.outputPath))
       .pipe(browserSync.reload({
-        stream:true
+        stream: true
       }));
   });
   
   
   gulp.task('js',function(){
-    return gulp.src('src/scripts/**/*.js')
-      .pipe(gulp.dest('app/assets/scripts'))
+    return gulp.src(config.js.basePath)
+      .pipe(gulp.dest(config.js.outputPath))
       .pipe(uglify())
-      .pipe(renameFiles({ suffix: '.min' }))
-      .pipe(gulp.dest('app/assets/scripts'))
+      .pipe(renameFiles({ 
+        suffix: config.js.fileSuffix 
+      }))
+      .pipe(gulp.dest(config.js.outputPath))
       .pipe(browserSync.reload({
-        stream: true, 
-        once: true
+        stream: true
       }));
   });
   
   gulp.task('default', ['js', 'css', 'browser-sync'], function () {
-    gulp.watch("src/stylesheets/**/*.scss", ['css']);
-    gulp.watch("src/scripts/**/*.js", ['js']);
-    gulp.watch("app/*.ejs", ['bs-reload']);
+    gulp.watch(config.css.basePath, ['css']);
+    gulp.watch(config.js.basePath, ['js']);
+    gulp.watch(config.views.basePath, ['bs-reload']);
   });

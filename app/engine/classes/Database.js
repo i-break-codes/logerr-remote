@@ -14,7 +14,7 @@ var Database = function() {
     
     query = 'INSERT INTO ' + table + ' SET ?';
     
-    connect.query(query, data, function(err, result) {
+    connect.query(query, data, (err, result) => {
       if (err) throw err;
       cb({record: data, id: result.insertId});
     });
@@ -37,7 +37,7 @@ var Database = function() {
       query += ' LIMIT ' + limit;
     }
 
-    connect.query(query, function(err, rows, fields) {
+    connect.query(query, (err, rows, fields) => {
       if (err) throw err;
       cb({data: rows});
     });
@@ -60,7 +60,7 @@ var Database = function() {
     
     var concatVals = values.concat(where_values);
     
-    connect.query(query, concatVals, function(err, results) {
+    connect.query(query, concatVals, (err, results) => {
       if (err) throw err;
       cb(results);
     });

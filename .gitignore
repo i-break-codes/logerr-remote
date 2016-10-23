@@ -1,5 +1,1 @@
-/node_modules
-*.css
 .DS_Store
-/app/assets/scripts
-/app/assets/stylesheets
